@@ -113,11 +113,19 @@ int byteSwap(int x, int n, int m) {
  *   Difficulty: 3
  */
 unsigned reverse(unsigned v) {
-    unsigned mid1=((v&0x55555555)>>1)|((v<<1)&0x55555555);
-    unsigned mid2=((mid1&0x33333333)>>2)|((mid1<<2)&0x33333333);
-    unsigned mid3=((mid2&0x0f0f0f0f)>>4)|((mid2<<4)&0x0f0f0f0f);
-    unsigned mid4=((mid3&0x00ff00ff)>>8)|((mid3<<3)&0x00ff00ff);
-    unsigned fin=(mid4<<16)|(mid4>>16);
+    unsigned mid1 =
+        ((v >> 1) & 0x55555555) |
+        ((v & 0x55555555) << 1);
+    unsigned mid2 =
+        ((mid1 >> 2) & 0x33333333) |
+        ((mid1 & 0x33333333) << 2);
+    unsigned mid3 =
+        ((mid2 >> 4) & 0x0F0F0F0F) |
+        ((mid2 & 0x0F0F0F0F) << 4);
+    unsigned mid4 =
+        ((mid3 >> 8) & 0x00FF00FF) |
+        ((mid3 & 0x00FF00FF) << 8);
+    unsigned fin = (mid4 << 16) | (mid4 >> 16);
     return fin;
 }
 
